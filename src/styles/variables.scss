@@ -10,3 +10,9 @@ $font-size: 16px;
 /* Colors */
 $mirra-color: #F4D58D;
 $dark-color: #313131;
+
+/* Generic */
+body {
+    background-color: $mirra-color;
+    min-width: 350px;
+}

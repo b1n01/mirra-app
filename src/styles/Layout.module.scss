@@ -1,7 +1,23 @@
 @import './variables.scss';
 
+.nav {
+    display: flex;
+    position: absolute;
+    top: 60px;
+    align-items: center;
+}
+
+.options {
+    margin-left: 32px;
+
+    a {
+        margin-right: 16px;
+    }
+}
+
 .hero {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;

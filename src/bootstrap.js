@@ -11,4 +11,16 @@ export default function hello() {
         return config
     }, err => Promise.reject(err))
 
+    // Add interceptor to redirect when non authorized
+    axios.interceptors.response.use(undefined, error => {
+        if(error.response.status === 401) {
+            window.location.href = 'http://localhost:3000/login'; // TODO use ENV
+        }
+        return Promise.reject(error);
+      });
+
+      // Handle spotify sdk init
+      window.onSpotifyWebPlaybackSDKReady = () => {
+        console.log('SpotifyWebPlaybackSDKReady');
+    }
 }

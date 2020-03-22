@@ -2,88 +2,83 @@ import React from 'react'
 import axios from 'axios'
 
 import Layout from './Layout'
-import Logo from './Logo'
 import Button from './Button'
 import styles from '../styles/Share.module.scss'
 
 class Share extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-        key: null,
-    }
-    this.share = this.share.bind(this)
-    this.unshare = this.unshare.bind(this)
-  }
+	constructor(props) {
+		super(props)
 
-  componentDidMount() {
-    axios.get('http://localhost:1337/user-key').then(res => {
-        this.setState({key: res.data.key})
-    });
-  }
+		this.state = {
+			key: null,
+			isPublic: false,
+			isLoading: true,
+		}
 
-  share() {
-    axios.get('http://localhost:1337/share').then(res => {
-        this.setState({key: res.data.key})
-    });
-  }
+		this.share = this.share.bind(this)
+	}
 
-  unshare() {
-    axios.get('http://localhost:1337/unshare').then(res => {
-        this.setState({key: null})
-    });
-  }
+	componentDidMount() {
+		axios.get('http://localhost:1337/user-key').then(res => {
+			if (res.data.key) {
+				this.setState({
+					key: res.data.key,
+					isPublic: res.data.isPublic,
+					isLoading: false
+				})
+			}
+		});
+	}
 
-  getShareUrl() {
-    return 'http://localhost:3000/listen/' + this.state.key
-  }
+	share() {
+		axios.get('http://localhost:1337/share').then(res => {
+			this.setState({ key: res.data.key, isPublic: true })
+		});
+	}
 
-  getAction() {
-    if(this.state.key) {
-      return(
-        <div className={styles.publicAction}>
-          <span className={styles.label + ' ' + styles.makePrivateLabel}>
-            You Mirra shareable url:
-          </span>
-          <span ref={this.urlRef} className={styles.label + ' ' + styles.makePrivateLabel}>
-            {this.getShareUrl()}
-          </span>
-          <div className={styles.buttons}>
-            <span className={styles.leftButton}>
-              <a 
-                href={this.getShareUrl()}
-                className={styles.link}
-                target='_blank'
-                rel="noopener noreferrer"
-              >
-                <Button label='Open' />
-              </a>
-            </span>
-            <Button label='Make it private' onClick={this.unshare} />
-          </div>
-        </div>
-      )
-    } else {
-      return(
-          <div className={styles.privateAction}>
-              <p className={styles.label + ' ' + styles.makePublicLabel}>You can turn off sharing at any time</p>
-              <Button label='Make it public' onClick={this.share} />
-          </div>
-      )
-    }
-  }
+	getShareUrl() {
+		return 'http://localhost:3000/' + this.state.key
+	}
 
-  render() {
-    return (
-        <Layout>
-            <Logo />
-            <p className={styles.label}>
-                Anyone with your Mirra url can listen the same song you're listening to <br /> It requires Spotify Premium
-            </p>
-            {this.getAction()}
-        </Layout>
-    )
-  }
+	getButton() {
+		if (this.state.isPublic) {
+			return (
+				<a href={this.getShareUrl()} className={styles.link} target='_blank' rel="noopener noreferrer">
+					<Button label='Open' />
+				</a>
+			)
+		} else {
+			return <Button label='Make it public' onClick={this.share} />
+		}
+	}
+
+	getLoading() {
+		return (
+			<Layout>
+				<p className={styles.loadingLabel}>Loading...</p>
+			</Layout>
+		)
+	}
+
+	getContent() {
+		return (
+			<Layout>
+				<div className={styles.wrapper}>
+					<span className={styles.label}>
+						{this.getShareUrl()}
+					</span>
+					{this.getButton()}
+				</div>
+			</Layout>
+		)
+	}
+	render() {
+		if (this.state.isLoading) {
+			return this.getLoading()
+		} else {
+			return this.getContent()
+		}
+	}
 }
 
 export default Share;

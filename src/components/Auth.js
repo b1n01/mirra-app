@@ -2,16 +2,17 @@ import React from 'react'
 import { Redirect } from "react-router-dom";
 
 import Layout from './Layout'
-import Logo from './Logo'
-import styles from '../styles/Authenticated.module.scss'
+import styles from '../styles/Auth.module.scss'
 
-class Authenticated extends React.Component {
+class Auth extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
       isJwtSet: false,
     }
+
+    this.redirect = this.redirect.bind(this)
   }
 
   componentDidMount() {
@@ -26,15 +27,18 @@ class Authenticated extends React.Component {
     return result ? result.pop() : null;
   }
 
+  redirect() {
+    return this.state.isJwtSet ? <Redirect to='/'/> : null
+  }
+
   render() {
     return (
         <Layout>
-            <Logo />
             <p className={styles.label}>Loading...</p>
-            {this.state.isJwtSet ? <Redirect to='/share'/> : null}
+            {this.redirect()}
         </Layout>
     )
   }
 }
 
-export default Authenticated;
+export default Auth;

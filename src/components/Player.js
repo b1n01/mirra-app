@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios'
-import Logo from './Logo'
 import Layout from './Layout'
 import Button from './Button'
 import styles from '../styles/Player.module.scss'
@@ -99,15 +98,13 @@ class Player extends React.Component {
 		if(!track) {
 			return(
 				<Layout>
-					<Logo />
-				<p>Loading</p>
-			</Layout>
+					<p>Loading</p>
+				</Layout>
 			)
 		}
 
 		return (
 			<Layout>
-				<Logo />
 				<div className={styles.userBox}>
 					{
 						this.state.user.profile_pic_url ? 
