@@ -1,0 +1,49 @@
+@import './variables.scss';
+
+.label {
+    font-family: $styled-font;
+    font-size: 19px;
+    color: $dark-color;
+    text-align: center;
+}
+
+.makePrivateLabel {
+    margin-bottom: 16px;
+}
+
+.makePublicLabel {
+    margin-right: 8px;
+}
+
+
+.privateAction {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.publicAction {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.turnOffLabel {
+    margin: 0 16px 0 0;
+}
+
+.link {
+    text-decoration: none;
+    color: $dark-color;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.leftButton {
+    margin-right: 16px;
+}
+
