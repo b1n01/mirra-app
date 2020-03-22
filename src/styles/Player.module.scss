@@ -1,1 +1,64 @@
-@import './variables.scss';
+@import './variables.scss'; 
+
+.user,
+.track,
+.album,
+.artists {
+    color: $dark-color;
+    font-family: $styled-font;
+    font-size: 21px;
+}
+
+.userBox {
+    height: 60px;
+    align-items: center;
+    display: flex;
+}
+
+.userPic {
+    margin-right: 16px;
+    border-radius: 8;
+    width: 16px;
+    height: 16px;
+}
+
+.trackBox {
+    display: flex;
+}
+
+.trackInfo {
+    display: flex;
+    flex-direction: column;
+    margin-left: 32px;
+}
+
+.track {
+    font-size: 48px;
+}
+
+.album {
+    font-size: 26px;
+    margin-top: 16px;
+}
+
+.artists {
+    font-size: 26px;
+    margin-top: 16px;
+}
+
+.trackPic {
+    width: 350px;
+}
+
+.actions {
+    display: flex;
+    margin-top: auto;
+
+    * {
+        margin-right: 8px;
+    }
+
+    *:last-child {
+        margin-right: 0;
+    }
+}
