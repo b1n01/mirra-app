@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-
+import { Link } from 'react-router-dom'
 import Layout from './Layout'
 import Button from './Button'
 import styles from '../styles/Share.module.scss'
@@ -20,13 +20,11 @@ class Share extends React.Component {
 
 	componentDidMount() {
 		axios.get('http://localhost:1337/user-key').then(res => {
-			if (res.data.key) {
-				this.setState({
-					key: res.data.key,
-					isPublic: res.data.isPublic,
-					isLoading: false
-				})
-			}
+			this.setState({
+				key: res.data.key,
+				isPublic: Boolean(res.data.key),
+				isLoading: false,
+			})
 		});
 	}
 
@@ -36,47 +34,35 @@ class Share extends React.Component {
 		});
 	}
 
-	getShareUrl() {
-		return 'http://localhost:3000/' + this.state.key
-	}
-
-	getButton() {
-		if (this.state.isPublic) {
-			return (
-				<a href={this.getShareUrl()} className={styles.link} target='_blank' rel="noopener noreferrer">
-					<Button label='Open' />
-				</a>
-			)
-		} else {
-			return <Button label='Make it public' onClick={this.share} />
-		}
-	}
-
-	getLoading() {
-		return (
-			<Layout>
-				<p className={styles.loadingLabel}>Loading...</p>
-			</Layout>
-		)
-	}
-
-	getContent() {
-		return (
-			<Layout>
-				<div className={styles.wrapper}>
-					<span className={styles.label}>
-						{this.getShareUrl()}
-					</span>
-					{this.getButton()}
-				</div>
-			</Layout>
-		)
-	}
 	render() {
 		if (this.state.isLoading) {
-			return this.getLoading()
+			return (
+				<Layout>
+					<p className={styles.label}>
+						Loading...
+					</p>
+				</Layout>
+			)
+		} else if(!this.state.isPublic) {
+			return (
+				<Layout>
+					<span className={styles.label}>
+						Your account is private
+					</span>
+					<Button label='Make it public' onClick={this.share} />
+				</Layout>
+			)
 		} else {
-			return this.getContent()
+			return (
+				<Layout>
+					<span className={styles.label}>
+						Share your permalink
+					</span>
+					<Link to={this.state.key} className={styles.link}>
+						<Button label={'localhost:3000/' + this.state.key} />
+					</Link>
+				</Layout>
+			)
 		}
 	}
 }

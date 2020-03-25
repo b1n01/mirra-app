@@ -8,7 +8,7 @@
 
 .label {
     font-family: $styled-font;
-    font-size: 19px;
+    font-size: 28px;
     color: $dark-color;
     text-align: center;
     margin: 0 0 16px 0;
@@ -16,20 +16,4 @@
 
 .link {
     text-decoration: none;
-}
-
-.loadingLabel {
-    font-size: 24px;
-    font-family: $styled-font;
-    color: $dark-color;
-}
-
-@media only screen and (min-width: 600px) {
-    .wrapper {
-        flex-direction: row;
-    }
-
-    .label {
-        margin: 0 16px 0 0;
-    }
 }

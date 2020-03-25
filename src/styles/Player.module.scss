@@ -1,12 +1,19 @@
 @import './variables.scss'; 
 
+.loadingLabel {
+    font-size: 24px;
+    font-family: $styled-font;
+    color: $dark-color;
+    margin: 8px;
+}
+
 .user,
 .track,
 .album,
 .artists {
     color: $dark-color;
     font-family: $styled-font;
-    font-size: 21px;
+    font-size: 19px;
 }
 
 .userBox {
@@ -17,42 +24,46 @@
 
 .userPic {
     margin-right: 16px;
-    border-radius: 8;
-    width: 16px;
-    height: 16px;
+    border-radius: 50%;
+    width: 32px;
 }
 
 .trackBox {
     display: flex;
+    margin-top: 32px;
+    flex-direction: column-reverse;
+    align-items: center;
 }
 
 .trackInfo {
     display: flex;
     flex-direction: column;
-    margin-left: 32px;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
 .track {
-    font-size: 48px;
+    font-size: 24px;
 }
 
 .album {
-    font-size: 26px;
+    font-size: 16px;
     margin-top: 16px;
 }
 
 .artists {
-    font-size: 26px;
+    font-size: 16px;
     margin-top: 16px;
 }
 
 .trackPic {
-    width: 350px;
+    width: 50%;
 }
 
 .actions {
     display: flex;
-    margin-top: auto;
+    margin-top: 32px;
+    justify-content: space-evenly;
 
     * {
         margin-right: 8px;
@@ -62,3 +73,17 @@
         margin-right: 0;
     }
 }
+
+
+@media only screen and (min-width: 600px) {
+    .trackBox {
+        justify-content: center;
+        flex-direction: row;
+        align-items: initial;
+    }
+
+    .trackInfo {
+        margin-left: 16px;
+        align-items: initial;
+    }
+  }

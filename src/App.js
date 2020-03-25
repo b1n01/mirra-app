@@ -4,6 +4,7 @@ import Login from './components/Login'
 import Auth from './components/Auth'
 import Share from './components/Share'
 import Player from './components/Player'
+import Logout from './components/Logout'
 import Settings from './components/Settings'
 import bootstrap from './bootstrap'
 
@@ -17,7 +18,7 @@ function App() {
         <Route path="/auth"component={Auth} />
         <Route path="/login" component={Login} />
         <Route path="/settings" component={Settings} />
-        <Route path="/logout" component={Settings} />
+        <Route path="/logout" component={Logout} />
         <Route path="/:key" component={Player} />
       </Switch>
     </Router>

@@ -2,9 +2,8 @@
 
 .nav {
     display: flex;
-    position: absolute;
-    top: 60px;
     align-items: center;
+    justify-content: center;
 }
 
 .options {
@@ -13,20 +12,23 @@
     a {
         margin-right: 16px;
     }
+
+    a:last-child {
+        margin-right: 0;
+    }
 }
 
 .hero {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: $mirra-color;
-    color: $dark-color;
+    min-height: calc(100vh - 96px);
 }
 
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 8px;
+    //max-width: 900px;
 }

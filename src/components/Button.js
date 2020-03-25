@@ -8,11 +8,8 @@ function Button(props) {
 			onClick={props.onClick}
 			className={styles.button}
 		>
-			{
-				props.spin ?
-				<img src={spinnerIcon} alt="spinner icon" className={styles.spinner}/> :
-				props.label
-			}
+			<img style={{display: props.spin ? 'inline' : 'none'}} src={spinnerIcon} alt="spinner icon" className={styles.spinner}/>
+			<span style={{display: !props.spin ? 'inline' : 'none'}}>{props.label}</span>
 		</span>
 	)
 }

@@ -22,17 +22,15 @@ class Home extends React.Component {
 		let authorizeUrl = process.env.REACT_APP_API_ENDPOINT + '/authorize'
 		return (
 			<div className={styles.hero}>
-				<div className={styles.content}>
 					<Logo />
-					<div className={styles.action}>
+					<div>
 						<p className={styles.label}>
-							Share what you are listening
+							share your own music tastes
 						</p>
 						<a href={authorizeUrl} className={styles.link} onClick={this.setLoading}>
 							<Button label="Login with Spotify" spin={this.state.isLoding} />
 						</a>
 					</div>
-				</div>
 			</div>
 		)
 	}
