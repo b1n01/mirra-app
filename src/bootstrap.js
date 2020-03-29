@@ -20,7 +20,5 @@ export default function hello() {
       });
 
       // Handle spotify sdk init
-      window.onSpotifyWebPlaybackSDKReady = () => {
-        console.log('SpotifyWebPlaybackSDKReady');
-    }
+      window.onSpotifyWebPlaybackSDKReady = () => {}
 }

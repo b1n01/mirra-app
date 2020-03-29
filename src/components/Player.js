@@ -3,6 +3,11 @@ import { withRouter } from "react-router";
 import axios from 'axios'
 import Layout from './Layout'
 import Button from './Button'
+import Loader from './Loader'
+import syncIcon from '../images/sync.svg'
+import muteIcon from '../images/mute.svg'
+import unmuteIcon from '../images/unmute.svg'
+import emptyIcon from '../images/empty.svg'
 import styles from '../styles/Player.module.scss'
 
 class Player extends React.Component {
@@ -20,6 +25,7 @@ class Player extends React.Component {
 			accessToken: null,
 			isMuted: false,
 			player: null,
+			isPrivate: false,
 		}
 
 		this.getAccessToken = this.getAccessToken.bind(this)
@@ -95,21 +101,34 @@ class Player extends React.Component {
 				isOnline: true,
 				isBusy: false,
 				isLoading: false,
+				isPrivate: false,
 			})
 		}).catch(err => {
 			if(err.response.data.type === 'USER_NOT_ONLINE') {
 				this.setState({
 					isOnline: false,
 					isBusy: false,
-					isLoading: false
+					isLoading: false,
+					isPrivate: false,
 				})
 				setTimeout(this.play, 60000);
+				this.state.player.pause()
 			} else if(err.response.data.type === 'PREMIUM_REQUIRED') {
 				this.setState({
 					premiumRequired: true,
 					isBusy: false,
+					isLoading: false,
+					isPrivate: false,
+				})
+				this.state.player.disconnect()
+			} else if(err.response.data.type === 'USER_IS_PRIVATE') {
+				this.setState({
+					isPrivate: true,
+					isBusy: false,
 					isLoading: false
 				})
+				setTimeout(this.play, 60000);
+				this.state.player.pause()
 			}
 		});
 	}
@@ -122,18 +141,26 @@ class Player extends React.Component {
 	}
 
 	render() {
+		if(this.state.isLoading) {
+			return <Loader />
+		}
+
 		if(this.state.premiumRequired) {
 			return(
-				<Layout>
-					<p className={styles.loadingLabel}>Sorry but you need Spotify Premium</p>
+				<Layout hero>
+					<p className={styles.premiumLabel}>Sorry but you need Spotify Premium</p>
 				</Layout>
 			)
 		}
 
-		if(this.state.isLoading) {
+		if(this.state.isPrivate) {
 			return(
-				<Layout>
-					<p className={styles.loadingLabel}>Loading...</p>
+				<Layout hero>
+					<div className={styles.offlineBox}>
+						<img src={emptyIcon} alt='empty icon' className={styles.emptyIcon} />
+						<p className={styles.premiumLabel}>This user is in a private listening session</p>
+						<Button label='Reload' onClick={this.play}/>
+					</div>
 				</Layout>
 			)
 		}
@@ -141,20 +168,20 @@ class Player extends React.Component {
 
 		if(!this.state.isOnline) {
 			return(
-				<Layout>
-					<p className={styles.loadingLabel}>User is currently offline</p>
-					<div className={styles.actions}>
-						<Button label='Reload' onClick={this.play} spin={this.state.isBusy}/>
+				<Layout hero>
+					<div className={styles.offlineBox}>
+						<img src={emptyIcon} alt='empty icon' className={styles.emptyIcon} />
+						<p>This user is currently offline</p>
+						<Button label='Reload' onClick={this.play}/>
 					</div>
 				</Layout>
 			)
 		}
 
-		let track = this.state.track
-		if(!track) {
+		if(!this.state.track) {
 			return(
 				<Layout>
-					<p className={styles.loadingLabel}>Where is the track?</p>
+					<p className={styles.premiumLabel}>Where is the track?</p>
 				</Layout>
 			)
 		}
@@ -163,24 +190,27 @@ class Player extends React.Component {
 			<Layout>
 				<div className={styles.userBox}>
 					{
-						this.state.user.profile_pic_url ? 
-						<img className={styles.userPic} src={this.state.user.profile_pic_url} alt="user pic" /> :
+						this.state.user.profilePic ? 
+						<img className={styles.userPic} src={this.state.user.profilePic} alt="user pic" /> :
 						null
 					}
-					<span className={styles.user}>{this.state.user.name} is listening</span>
+					<span>{this.state.user.isYou ? 'You are' : this.state.user.name + ' is'}  listening</span>
 				</div>
 				<div className={styles.trackBox}>
 					<img className={styles.trackPic} src={this.state.track.image} alt="album cover"/>
+
 					<div className={styles.trackInfo}>
-						<span className={styles.track}>{this.state.track.name}</span>
-						<span className={styles.album}>{this.state.track.album}</span>
-						<span className={styles.artists}>{this.state.track.artists}</span>
+						<div className={styles.trackDetails}>
+							<span className={styles.track}>{this.state.track.name}</span>
+							<span className={styles.album}>{this.state.track.album} - {this.state.track.artists}</span>
+						</div>
+						<div className={styles.actions}>
+							<img src={this.state.isMuted ? unmuteIcon : muteIcon} onClick={this.toogleMute} alt='mute unmute icon'/>
+							<img src={syncIcon} onClick={this.play} alt='sync icon'/>
+						</div>
 					</div>
 				</div>
-				<div className={styles.actions}>
-					<Button label={this.state.isMuted ? 'Unmute' : 'Mute'} onClick={this.toogleMute}/>
-					<Button label='Sync' onClick={this.play}/>
-				</div>
+				
 			</Layout>
 		)
 	}

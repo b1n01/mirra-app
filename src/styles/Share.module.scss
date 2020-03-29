@@ -1,19 +1,68 @@
 @import './variables.scss';
 
-.wrapper {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.permalinkBox {
+    margin: 60px 16px 0 16px;
+
+    p {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .permalink, .disabledPermalink {
+        color: $mirra-color;
+        font-size: 21px;
+        margin: 30px 0 0 0;
+        font-weight: bold;
+
+        a {
+            color: $mirra-color;
+            text-decoration: none;
+        }
+    }
+
+    .disabledPermalink {
+        opacity: 30%;
+    }
 }
 
-.label {
-    font-family: $styled-font;
-    font-size: 28px;
-    color: $dark-color;
-    text-align: center;
-    margin: 0 0 16px 0;
+.optionsWrapper {
+    background-color: #fff;
+    margin: 30px 0 0 0;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+
+    .optionsBox {
+        margin: 30px 16px 0 16px;
+
+        h1 {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+
+    .optionsBox:last-child {
+        margin-bottom: 30px;
+    }
+
+    .button {
+        margin-right: 16px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 }
 
-.link {
-    text-decoration: none;
+.friends {
+    margin: 60px auto -110px auto;
+    display: block;
+}
+
+@media only screen and (min-width: 600px) {
+    .optionsWrapper {
+        .optionsBox {
+            margin-left: 32px;
+            margin-right: 32px;
+        }
+    }
 }

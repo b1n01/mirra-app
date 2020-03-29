@@ -1,89 +1,80 @@
 @import './variables.scss'; 
 
-.loadingLabel {
-    font-size: 24px;
-    font-family: $styled-font;
-    color: $dark-color;
-    margin: 8px;
-}
-
-.user,
-.track,
-.album,
-.artists {
-    color: $dark-color;
-    font-family: $styled-font;
-    font-size: 19px;
-}
-
 .userBox {
-    height: 60px;
-    align-items: center;
+    margin: 90px 16px 30px 16px;
+    font-weight: bold;
+    font-size: 16px;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .userPic {
-    margin-right: 16px;
-    border-radius: 50%;
     width: 32px;
+    border-radius: 50%;
+    margin-right: 16px;
 }
 
 .trackBox {
-    display: flex;
-    margin-top: 32px;
-    flex-direction: column-reverse;
-    align-items: center;
-}
-
-.trackInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 16px;
-}
-
-.track {
-    font-size: 24px;
-}
-
-.album {
-    font-size: 16px;
-    margin-top: 16px;
-}
-
-.artists {
-    font-size: 16px;
-    margin-top: 16px;
+    max-width: 500px;
+    margin: 0 auto 60px auto;
 }
 
 .trackPic {
-    width: 50%;
+    width: 100%;
+}
+
+.trackInfo {
+    padding: 16px;
+    background-color: #fff;
+    display: flex;
+}
+
+.trackDetails {
+    display: flex;
+    flex-direction: column;
+    max-width: calc(100% - 68px);
+}
+
+.track {
+    font-weight: bold;
+}
+
+.album, .track {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .actions {
     display: flex;
-    margin-top: 32px;
-    justify-content: space-evenly;
+    margin-left: auto;
 
-    * {
-        margin-right: 8px;
-    }
+    img {
+        margin-right: 16px;
 
-    *:last-child {
-        margin-right: 0;
+        &:last-child {
+            margin-right: 0;
+        }
     }
 }
 
+.premiumLabel {
+    text-align: center;
+    font-size: 16px;
+}
 
-@media only screen and (min-width: 600px) {
-    .trackBox {
-        justify-content: center;
-        flex-direction: row;
-        align-items: initial;
+.offlineBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+        font-size: 16px;
+        margin: 0 0 32px 0;
     }
 
-    .trackInfo {
-        margin-left: 16px;
-        align-items: initial;
+    .emptyIcon {
+        margin: 0 0 32px 0;
     }
-  }
+}

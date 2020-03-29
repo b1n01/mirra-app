@@ -1,0 +1,36 @@
+@import './variables.scss';
+
+/* @see https://tobiasahlin.com/spinkit/ */
+
+.spinner {
+	margin: 0 auto;
+}
+
+.spinner > div {
+	width: 8px;
+	height: 8px;
+	margin: 8px;
+	background-color: $mirra-color;
+
+	border-radius: 100%;
+	display: inline-block;
+	animation: sk-bouncedelay 1s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+	animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+	animation-delay: -0.16s;
+}
+
+@keyframes sk-bouncedelay {
+	0%, 80%, 100% { 
+		-webkit-transform: scale(0);
+		transform: scale(0);
+	} 40% { 
+		-webkit-transform: scale(1.0);
+		transform: scale(1.0);
+	}
+}

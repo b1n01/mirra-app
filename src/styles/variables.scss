@@ -3,20 +3,20 @@
 @import-sanitize;
 
 /* Fonts */
-@import url('https://fonts.googleapis.com/css?family=Lilita+One&display=swap');
-$styled-font: 'Lilita One', cursive;
-$font-size: 16px;
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i&display=swap');
+$styled-font: 'Ubuntu', sans-serif;
+$font-size: 14px;
 
 /* Colors */
-//$mirra-color: #F4D58D;
-//$mirra-color: #fbc490;
-$mirra-grad-from: rgb(252,181,157);
-$mirra-grad-to: rgb(255,211,182);
-$dark-color: #313131;
+$mirra-color: #FF6666;
+$bg-color: #F0F1F5;
+$dark-color: #424242;
 
 /* Generic */
 body {
-    //background-color: $mirra-color;
-    min-width: 320px;
-    background: linear-gradient(-45deg, $mirra-grad-from 0%, $mirra-grad-to 100%);
+    min-width: 375px;
+    background-color: $bg-color;
+    font-family: $styled-font;
+    color: $dark-color;
+    font-size: 14px;
 }

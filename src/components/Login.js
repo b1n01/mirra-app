@@ -1,6 +1,8 @@
 import React from 'react';
-import Logo from './Logo'
+import Loader from './Loader'
 import Button from './Button'
+import Layout from './Layout'
+import flower from '../images/flower.svg'
 import styles from '../styles/Login.module.scss'
 
 class Home extends React.Component {
@@ -19,19 +21,24 @@ class Home extends React.Component {
 	}
 
 	render() {
+		if(this.state.isLoding) return <Loader />
+
 		let authorizeUrl = process.env.REACT_APP_API_ENDPOINT + '/authorize'
 		return (
-			<div className={styles.hero}>
-					<Logo />
-					<div>
-						<p className={styles.label}>
-							share your own music tastes
-						</p>
-						<a href={authorizeUrl} className={styles.link} onClick={this.setLoading}>
-							<Button label="Login with Spotify" spin={this.state.isLoding} />
-						</a>
-					</div>
-			</div>
+			<Layout hero>
+				<div className={styles.content}>
+					<p className={styles.title}>
+						Share your own music tastes
+					</p>
+					<p className={styles.subtitle}>
+						Mirra let’s you mirror your Spotify listening live 
+					</p>
+					<a href={authorizeUrl} className={styles.button} onClick={this.setLoading}>
+						<Button label="Login with Spotify" />
+					</a>
+					<img src={flower} alt='flower pic' className={styles.flower}/>
+				</div>
+			</Layout>
 		)
 	}
 }

@@ -1,21 +1,31 @@
 @import './variables.scss';
 
-.hero {
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-    padding: 0 8px;
-    text-align: center;
-    flex-direction: column;
+.content {
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    min-width: 343px;
+    width: 100%;
 }
 
-.label {
-    font-family: $styled-font;
-    font-size: 24px;
-    color: $dark-color;
-    margin: 0 0 20px 0;
+.title {
+    font-size: 21px;
+    font-weight: bold;
+    margin: 0;
 }
 
-.link {
+.subtitle {
+    margin: 0;
+    font-size: 14px;
+}
+
+.button {
     text-decoration: none;
+    margin: 16px 0 0 0;
+    display: inline-block;
+}
+.flower {
+    position: absolute;
+    top: -140px;
+    right: -140px;
 }
