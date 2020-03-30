@@ -14,7 +14,7 @@ export default function hello() {
     // Add interceptor to redirect when non authorized
     axios.interceptors.response.use(undefined, error => {
         if(error.response.status === 401) {
-            window.location.href = 'http://localhost:3000/login'; // TODO use ENV
+            window.location.href =  process.env.REACT_APP_APP_ENDPOINT + '/login';
         }
         return Promise.reject(error);
       });
