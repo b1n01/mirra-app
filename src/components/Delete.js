@@ -8,8 +8,8 @@ import styles from '../styles/Delete.module.scss'
 class Delete extends React.Component {
 
 	deleteAccount() {
-		axios.delete('http://localhost:1337/account')
-			.then(() => window.location.href = 'http://localhost:3000/logout')
+		axios.delete(process.env.REACT_APP_API_ENDPOINT + '/account')
+			.then(() => window.location.href = process.env.REACT_APP_APP_ENDPOINT + '/logout')
 	}
 
 	render() {

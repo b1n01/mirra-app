@@ -49,7 +49,7 @@ class Player extends React.Component {
 	}
 
 	getAccessToken() {
-		axios.get('http://localhost:1337/access-token').then(res => {
+		axios.get(process.env.REACT_APP_API_ENDPOINT + '/access-token').then(res => {
 			this.setState(
 				{accessToken: res.data.access_token},
 				this.createDevice()
@@ -92,7 +92,7 @@ class Player extends React.Component {
 		this.setState({isBusy: true})
 		let userKey = this.props.match.params.key
 		let deviceId = this.state.deviceId
-		let url = `http://localhost:1337/play?user_key=${userKey}&device_id=${deviceId}`;
+		let url = process.env.REACT_APP_API_ENDPOINT + `/play?user_key=${userKey}&device_id=${deviceId}`;
 
 		axios.get(url).then(res => {
 			this.setState({

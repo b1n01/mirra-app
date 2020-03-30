@@ -24,7 +24,7 @@ class Share extends React.Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:1337/user-key').then(res => {
+		axios.get(process.env.REACT_APP_API_ENDPOINT + '/user-key').then(res => {
 			this.setState({
 				key: res.data.key,
 				isPublic: res.data.isPublic,
@@ -34,12 +34,12 @@ class Share extends React.Component {
 	}
 
 	share() {
-		axios.get('http://localhost:1337/share')
+		axios.get(process.env.REACT_APP_API_ENDPOINT + '/share')
 			.then(() => this.setState({isPublic: true}));
 	}
 
 	unshare() {
-		axios.get('http://localhost:1337/unshare')
+		axios.get(process.env.REACT_APP_API_ENDPOINT + '/unshare')
 			.then(() => this.setState({isPublic: false}));
 	}
 
