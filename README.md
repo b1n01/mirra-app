@@ -8,6 +8,9 @@ Mirra lets you mirror what someone else is listening on Spotify while hi is list
 
 > NOTE: you need Spotify Premium to use the app
 
+## API
+
+The api for this app can be found [here](https://github.com/b1n01/mirra-api).
 ## Development
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
